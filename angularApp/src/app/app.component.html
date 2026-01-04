@@ -1,0 +1,18 @@
+<h1>Hello</h1>
+<p>My first Angular App</p>
+
+
+<p *ngIf="isLoggedIn">
+    <button (click)="logout()">Logout</button>
+</p>
+
+<!-- 
+<h1>Project Management App</h1>
+<nav>
+ <a routerLink="">Home</a> |
+ <a routerLink="projects">Project</a> |
+ <a routerLink="students">Student List</a> |
+ <a routerLink="students/create">Add Student</a>
+</nav> -->
+
+<router-outlet></router-outlet>

@@ -1,0 +1,47 @@
+services:
+  mongodb:
+    image: mongo:6
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    image: puskr99/my-api:latest
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongodb:27017/fullstack_demo
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    command: ["npm", "start"]
+
+  frontend:
+    image: puskr99/my-app:latest
+    restart: always
+    depends_on:
+      - backend
+    environment:
+      # Replace this with actual server/aws PUBLIC IP
+      - VITE_API_URL=http://34.235.167.150:3000
+    ports:
+      - "5173:5173"
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+  
+  # angular-frontend:
+  #   image: puskr99/my-app-angular:latest
+  #   restart: always
+  #   depends_on:
+  #     - backend
+  #   environment:
+  #     - API_URL=http://34.235.167.150:3000
+  #   ports:
+  #     - "4200:4200"
+  #   command: ["npm", "start", "--", "--host", "0.0.0.0", "--port", "4200"]
+
+volumes:
+  mongo_data:

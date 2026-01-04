@@ -1,0 +1,15 @@
+<p>project works!</p>
+
+<p>Hello {{ name }} && {{ message }}</p>
+<button (click)="onButtonClick()">Click Me!!!</button>
+
+<h2>*ngIf</h2>
+<p *ngIf="isLoggedIn">You are now logged in.</p>
+<p *ngIf="!isLoggedIn">Please login to continue!!!</p>
+
+
+<h2>*ngFor</h2>
+<p *ngFor="let i of students">
+    {{ i }}
+</p>
+
